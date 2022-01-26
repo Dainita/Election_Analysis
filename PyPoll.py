@@ -2,7 +2,7 @@ import csv
 import os
 
 csvpath = os.path.join("Resources", "election_results.csv")
-election_results = os.path.join("Another Analysis", "election_analysis.txt")
+election_results = os.path.join("Analysis", "election_analysis.txt")
 
 total_votes = 0
 candidate_options = []
@@ -36,8 +36,11 @@ text_file.write(election_results)
 for candidate_name in candidate_votes:
       votes = candidate_votes[candidate_name]
       vote_percentage = float(votes)/float(total_votes) * 100
-    #print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
-    
+      candidate_results = (
+        f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+      print(candidate_results)
+      text_file.write(candidate_results)
+
       if (votes > winning_count) and (vote_percentage > winning_percentage):
         winning_count = votes
         winning_percentage = vote_percentage        
@@ -50,5 +53,6 @@ for candidate_name in candidate_votes:
         f"Winning Percentage: {winning_percentage:.1f}%\n"
         f"-------------------------\n")
 
-    #print(winning_candidate_summary)
+print(winning_candidate_summary)
+text_file.write(winning_candidate_summary)
 
