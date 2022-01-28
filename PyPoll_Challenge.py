@@ -101,20 +101,22 @@ with open(file_to_load) as election_data:
 
             # 6d: Print the county results to the terminal.
             county_results =(
-                f"{county_name}: {county_percentage:1f}% ({vote_count}\n")
-        print(county_results)
+                f"{county_name}: {county_percentage:.1f}% ({vote_count:,})\n")
+            print(county_results)
             # 6e: Save the county votes to a text file.
-        txt_file.write(county_results)
+            txt_file.write(county_results)
             # 6f: Write an if statement to determine the winning county and get its vote count.
-        if (vote_count > winning_count) and (county_percentage>winning_percentage):
-            winning_count = vote_count
-            winning_county = county_name
-            winning_percentage = county_percentage     
+            if (vote_count > largest_county) and (county_percentage>county_voter_turnout):
+                largest_county = vote_count
+                winning_county = county_name
+                count_voter_turnout = county_percentage     
+
         # 7: Print the county with the largest turnout to the terminal.
         County_with_largest_turnout = (
             f"-------------------------\n"
-            f"Largest County Turnout: {winning_county}\n"
+            f"Largest County Turnout: {winning_county:}\n"
             f"-------------------------\n")
+        print(County_with_largest_turnout)
 
         # 8: Save the county with the largest turnout to a text file.
         txt_file.write(County_with_largest_turnout)
@@ -136,8 +138,8 @@ with open(file_to_load) as election_data:
 
             # Determine winning vote count, winning percentage, and candidate.
             if (votes > winning_count) and (vote_percentage > winning_percentage):
-                winning_count = votes
                 winning_candidate = candidate_name
+                winning_count = votes
                 winning_percentage = vote_percentage
 
         # Print the winning candidate (to terminal)
@@ -149,5 +151,5 @@ with open(file_to_load) as election_data:
             f"-------------------------\n")
         print(winning_candidate_summary)
 
-        # Save the winning candidate's name to the text file
+            # Save the winning candidate's name to the text file
         txt_file.write(winning_candidate_summary)
